@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assessment Test Helper</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .test-group {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .test-group h2 {
+            margin-top: 0;
+            font-size: 1.3rem;
+        }
+        button {
+            background: white;
+            color: #667eea;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 5px;
+            transition: all 0.3s;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        .info {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+        .warning {
+            background: rgba(255, 193, 7, 0.3);
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-size: 0.85rem;
+        }
+        .success {
+            background: rgba(76, 175, 80, 0.3);
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Assessment Test Helper</h1>
+        
+        <div class="test-group">
+            <h2>👶 Early Childhood (3-6 yaş)</h2>
+            <button onclick="testEarly()">Test Early Assessment</button>
+            <div class="info">
+                <strong>Beklenen:</strong> Basit cartoon görseller (gülen elma, renkli araba)<br>
+                <strong>Sorular:</strong> Eşleme, renk, kategori, sayma
+            </div>
+        </div>
+
+        <div class="test-group">
+            <h2>📚 School Age (7-12 yaş)</h2>
+            <button onclick="testSchool()">Test School Assessment</button>
+            <div class="info">
+                <strong>Beklenen:</strong> Detaylı cartoon görseller (kedi, balık, çiçek)<br>
+                <strong>Sorular:</strong> Fonetik, kelime tanıma, sıralama, okuma
+            </div>
+        </div>
+
+        <div class="test-group">
+            <h2>🎓 Teen (13+ yaş)</h2>
+            <button onclick="testTeen()">Test Teen Assessment</button>
+            <div class="info">
+                <strong>Beklenen:</strong> Gerçekçi görseller (emoji, işaret, ikon)<br>
+                <strong>Sorular:</strong> Duygu analizi, güvenlik, sosyal beceri
+            </div>
+        </div>
+
+        <div class="warning">
+            ⚠️ <strong>Not:</strong> Her test butonu mevcut profili silip yeni bir profil oluşturacak ve assessment'e yönlendirecek.
+        </div>
+
+        <div class="test-group">
+            <h2>🔧 Yardımcı Araçlar</h2>
+            <button onclick="clearData()">Tüm Verileri Sil</button>
+            <button onclick="checkAssets()">Görselleri Kontrol Et</button>
+            <button onclick="window.location.href='/'">Ana Sayfaya Dön</button>
+        </div>
+
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function showResult(message, isSuccess = true) {
+            const result = document.getElementById('result');
+            result.className = isSuccess ? 'success' : 'warning';
+            result.innerHTML = message;
+            setTimeout(() => result.innerHTML = '', 5000);
+        }
+
+        async function clearData() {
+            localStorage.clear();
+            const dbs = await indexedDB.databases();
+            for (const db of dbs) {
+                indexedDB.deleteDatabase(db.name);
+            }
+            showResult('✅ Tüm veriler silindi!');
+        }
+
+        async function createTestProfile(age, name) {
+            await clearData();
+            
+            const profile = {
+                name: name,
+                chronologicalAge: age,
+                developmentalAge: age,
+                interests: ['test'],
+                avoidances: [],
+                sensoryTriggers: [],
+                communicationStyle: 'Verbal'
+            };
+
+            const storeData = {
+                state: {
+                    stage: 'ASSESSMENT',
+                    profile: profile,
+                    buddy: null,
+                    curriculum: null,
+                    moduleContents: {},
+                    completedModuleIds: [],
+                    activeModule: null,
+                    tokens: 0,
+                    performanceLogs: [],
+                    globalContext: 'Test session',
+                    isSummarizing: false,
+                    gallery: [],
+                    stories: [],
+                    inventory: [],
+                    shopState: null,
+                    puzzleAssets: [],
+                    fusionBlueprint: null,
+                    homeworkPreview: {
+                        analysis: null,
+                        moduleId: null,
+                        module: null,
+                        isReady: false
+                    }
+                },
+                version: 0
+            };
+
+            localStorage.setItem('tosba-storage', JSON.stringify(storeData));
+            
+            // IndexedDB'ye de kaydet
+            const request = indexedDB.open('TOSBA_DB', 1);
+            request.onupgradeneeded = (event) => {
+                const db = event.target.result;
+                if (!db.objectStoreNames.contains('keyval')) {
+                    db.createObjectStore('keyval');
+                }
+            };
+            request.onsuccess = (event) => {
+                const db = event.target.result;
+                const transaction = db.transaction('keyval', 'readwrite');
+                const store = transaction.objectStore('keyval');
+                store.put(JSON.stringify(storeData), 'tosba-storage');
+                transaction.oncomplete = () => {
+                    showResult(`✅ ${name} profili oluşturuldu (${age} yaş). Yönlendiriliyor...`);
+                    setTimeout(() => window.location.href = '/', 1500);
+                };
+            };
+        }
+
+        function testEarly() {
+            createTestProfile(5, 'Ali (Test)');
+        }
+
+        function testSchool() {
+            createTestProfile(10, 'Ayşe (Test)');
+        }
+
+        function testTeen() {
+            createTestProfile(15, 'Mehmet (Test)');
+        }
+
+        async function checkAssets() {
+            const assets = [
+                // Early
+                'apple_red.png', 'apple_green.png', 'ball_red.png', 'banana.png', 
+                'car_toy.png', 'sock.png', 'shoe_sport.png', 'spoon.png', 'ball_colorful.png',
+                // School
+                'car_red.png', 'fish.png', 'flower.png', 'cat.png', 
+                'apple_whole.png', 'apple_bitten.png', 'apple_core.png',
+                // Teen
+                'child_dropped_icecream.png', 'emoji_sad.png', 'emoji_happy.png', 'emoji_scared.png',
+                'sign_stop.png', 'icon_person_standing.png', 'icon_person_running.png', 
+                'icon_person_eating.png', 'weather_snowy.png', 'coat_red.png', 'weather_sunny.png',
+                'icon_help.png', 'icon_laugh.png', 'icon_ignore.png',
+                'buddy_asking.png'
+            ];
+
+            let missing = [];
+            for (const asset of assets) {
+                try {
+                    const response = await fetch(`/assets/assessment/${asset}`, { method: 'HEAD' });
+                    if (!response.ok) missing.push(asset);
+                } catch {
+                    missing.push(asset);
+                }
+            }
+
+            if (missing.length === 0) {
+                showResult(`✅ Tüm görseller mevcut! (${assets.length} adet)`);
+            } else {
+                showResult(`⚠️ Eksik görseller: ${missing.join(', ')}`, false);
+            }
+        }
+    </script>
+</body>
+</html>

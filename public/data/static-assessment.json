@@ -1,0 +1,355 @@
+{
+    "assessment_id": "static_level_test_v1",
+    "version": "1.0.0",
+    "metadata": {
+        "title": "Level Assessment Exam",
+        "description": "3-stage static assessment test",
+        "totalQuestions": 9,
+        "branches": [
+            "Branch1_Perception",
+            "Branch2_Literacy",
+            "Branch3_Functional"
+        ]
+    },
+    "questions": [
+        {
+            "id": "q1",
+            "branch": 1,
+            "type": "matching",
+            "title": "Exact Matching",
+            "buddyQuestion": "Which of these is the SAME as the one above?",
+            "referenceAsset": "apple_red.png",
+            "options": [
+                {
+                    "id": "q1_opt1",
+                    "asset": "apple_red.png",
+                    "label": "Red Apple",
+                    "isCorrect": true
+                },
+                {
+                    "id": "q1_opt2",
+                    "asset": "apple_green.png",
+                    "label": "Green Apple",
+                    "isCorrect": false,
+                    "errorType": "color_differentiation"
+                },
+                {
+                    "id": "q1_opt3",
+                    "asset": "ball_red.png",
+                    "label": "Red Ball",
+                    "isCorrect": false,
+                    "errorType": "object_differentiation"
+                }
+            ],
+            "branchWeight": 1
+        },
+        {
+            "id": "q2",
+            "branch": 1,
+            "type": "categorization",
+            "title": "Categorization",
+            "buddyQuestion": "Which one can you EAT? Show me the food.",
+            "referenceAsset": null,
+            "options": [
+                {
+                    "id": "q2_opt1",
+                    "asset": "banana.png",
+                    "label": "Banana",
+                    "isCorrect": true
+                },
+                {
+                    "id": "q2_opt2",
+                    "asset": "car_toy.png",
+                    "label": "Car",
+                    "isCorrect": false
+                },
+                {
+                    "id": "q2_opt3",
+                    "asset": "sock.png",
+                    "label": "Sock",
+                    "isCorrect": false
+                }
+            ],
+            "branchWeight": 1
+        },
+        {
+            "id": "q3",
+            "branch": 1,
+            "type": "association",
+            "title": "Association",
+            "buddyQuestion": "What goes with the shoe?",
+            "referenceAsset": "shoe_sport.png",
+            "options": [
+                {
+                    "id": "q3_opt1",
+                    "asset": "sock.png",
+                    "label": "Sock",
+                    "isCorrect": true
+                },
+                {
+                    "id": "q3_opt2",
+                    "asset": "spoon.png",
+                    "label": "Spoon",
+                    "isCorrect": false
+                },
+                {
+                    "id": "q3_opt3",
+                    "asset": "ball_colorful.png",
+                    "label": "Ball",
+                    "isCorrect": false
+                }
+            ],
+            "branchWeight": 1
+        },
+        {
+            "id": "q4",
+            "branch": 2,
+            "type": "phonics",
+            "title": "Phonics Awareness",
+            "buddyQuestion": "Which picture starts with the sound 'C'?",
+            "referenceAsset": null,
+            "targetSound": "C",
+            "options": [
+                {
+                    "id": "q4_opt1",
+                    "asset": "car_red.png",
+                    "label": "Car",
+                    "isCorrect": true
+                },
+                {
+                    "id": "q4_opt2",
+                    "asset": "fish.png",
+                    "label": "Fish",
+                    "isCorrect": false
+                },
+                {
+                    "id": "q4_opt3",
+                    "asset": "flower.png",
+                    "label": "Flower",
+                    "isCorrect": false
+                }
+            ],
+            "branchWeight": 2
+        },
+        {
+            "id": "q5",
+            "branch": 2,
+            "type": "sight_words",
+            "title": "Word Recognition",
+            "buddyQuestion": "Which word matches the picture?",
+            "referenceAsset": "cat.png",
+            "isCritical": true,
+            "options": [
+                {
+                    "id": "q5_opt1",
+                    "asset": null,
+                    "label": "CAT",
+                    "isCorrect": true,
+                    "isTextOnly": true
+                },
+                {
+                    "id": "q5_opt2",
+                    "asset": null,
+                    "label": "CUT",
+                    "isCorrect": false,
+                    "isTextOnly": true,
+                    "errorType": "visual_similarity"
+                },
+                {
+                    "id": "q5_opt3",
+                    "asset": null,
+                    "label": "CAP",
+                    "isCorrect": false,
+                    "isTextOnly": true,
+                    "errorType": "auditory_similarity"
+                }
+            ],
+            "branchWeight": 2
+        },
+        {
+            "id": "q6",
+            "branch": 2,
+            "type": "sequencing",
+            "title": "Sequencing Logic",
+            "buddyQuestion": "What is the correct order of events?",
+            "referenceAsset": null,
+            "sequenceCards": [
+                {
+                    "id": "seq_a",
+                    "asset": "apple_bitten.png",
+                    "label": "Bitten Apple",
+                    "order": 2
+                },
+                {
+                    "id": "seq_b",
+                    "asset": "apple_whole.png",
+                    "label": "Whole Apple",
+                    "order": 1
+                },
+                {
+                    "id": "seq_c",
+                    "asset": "apple_core.png",
+                    "label": "Apple Core",
+                    "order": 3
+                }
+            ],
+            "options": [
+                {
+                    "id": "q6_opt1",
+                    "label": "B - A - C",
+                    "sequence": [
+                        "seq_b",
+                        "seq_a",
+                        "seq_c"
+                    ],
+                    "isCorrect": true
+                },
+                {
+                    "id": "q6_opt2",
+                    "label": "A - B - C",
+                    "sequence": [
+                        "seq_a",
+                        "seq_b",
+                        "seq_c"
+                    ],
+                    "isCorrect": false
+                },
+                {
+                    "id": "q6_opt3",
+                    "label": "C - B - A",
+                    "sequence": [
+                        "seq_c",
+                        "seq_b",
+                        "seq_a"
+                    ],
+                    "isCorrect": false
+                }
+            ],
+            "branchWeight": 2
+        },
+        {
+            "id": "q7",
+            "branch": 3,
+            "type": "emotion_recognition",
+            "title": "Emotion Analysis",
+            "buddyQuestion": "The child dropped their ice cream. How do they feel?",
+            "referenceAsset": "child_dropped_icecream.png",
+            "visualStyle": "realistic",
+            "options": [
+                {
+                    "id": "q7_opt1",
+                    "asset": "emoji_sad.png",
+                    "label": "Sad",
+                    "isCorrect": true
+                },
+                {
+                    "id": "q7_opt2",
+                    "asset": "emoji_happy.png",
+                    "label": "Happy",
+                    "isCorrect": false
+                },
+                {
+                    "id": "q7_opt3",
+                    "asset": "emoji_scared.png",
+                    "label": "Scared",
+                    "isCorrect": false
+                }
+            ],
+            "branchWeight": 3
+        },
+        {
+            "id": "q8",
+            "branch": 3,
+            "type": "safety_signs",
+            "title": "Safety Signs",
+            "buddyQuestion": "What should you do when you see this sign?",
+            "referenceAsset": "sign_stop.png",
+            "visualStyle": "realistic",
+            "options": [
+                {
+                    "id": "q8_opt1",
+                    "asset": "icon_person_standing.png",
+                    "label": "Stop",
+                    "isCorrect": true
+                },
+                {
+                    "id": "q8_opt2",
+                    "asset": "icon_person_running.png",
+                    "label": "Run",
+                    "isCorrect": false
+                },
+                {
+                    "id": "q8_opt3",
+                    "asset": "icon_person_eating.png",
+                    "label": "Eat",
+                    "isCorrect": false
+                }
+            ],
+            "branchWeight": 3
+        },
+        {
+            "id": "q9",
+            "branch": 3,
+            "type": "reading_comprehension",
+            "title": "Reading Comprehension",
+            "buddyQuestion": "How is the weather?",
+            "referenceText": "Mike put on his red coat because it was snowing outside.",
+            "visualStyle": "realistic",
+            "isHyperlexiaTrap": true,
+            "options": [
+                {
+                    "id": "q9_opt1",
+                    "asset": "weather_snowy.png",
+                    "label": "Snowy",
+                    "isCorrect": true
+                },
+                {
+                    "id": "q9_opt2",
+                    "asset": "coat_red.png",
+                    "label": "Red Coat",
+                    "isCorrect": false,
+                    "errorType": "hyperlexia_trap"
+                },
+                {
+                    "id": "q9_opt3",
+                    "asset": "weather_sunny.png",
+                    "label": "Sunny",
+                    "isCorrect": false
+                }
+            ],
+            "branchWeight": 3
+        }
+    ],
+    "scoring": {
+        "levelMapping": [
+            {
+                "level": 0,
+                "name": "Pre-School",
+                "branch": "Sensory",
+                "condition": "correctCount === 0",
+                "curriculum": "Touch & Sound Reaction Only"
+            },
+            {
+                "level": 1,
+                "name": "Beginner",
+                "branch": "Branch1",
+                "condition": "branch1Correct >= 2 && branch2Correct < 2",
+                "curriculum": "Matching, PECS, Colors"
+            },
+            {
+                "level": 2,
+                "name": "Intermediate",
+                "branch": "Branch2",
+                "condition": "branch1Correct >= 2 && branch2Correct >= 2 && branch3Correct < 2",
+                "curriculum": "Phonics, Reading, Sentence Building"
+            },
+            {
+                "level": 3,
+                "name": "Advanced",
+                "branch": "Branch3",
+                "condition": "branch1Correct >= 2 && branch2Correct >= 2 && branch3Correct >= 2",
+                "curriculum": "Functional Living, Money Skills, Social Skills"
+            }
+        ]
+    }
+}

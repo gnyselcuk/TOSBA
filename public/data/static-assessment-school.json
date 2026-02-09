@@ -1,0 +1,335 @@
+{
+    "assessment_id": "static_level_test_school_v1",
+    "version": "1.0.0",
+    "ageGroup": "school",
+    "metadata": {
+        "title": "Level Assessment - School Age (7-12 years)",
+        "description": "Literacy and logic assessment for school-age children",
+        "totalQuestions": 9,
+        "targetAge": "7-12"
+    },
+    "questions": [
+        {
+            "id": "school_q1",
+            "branch": 1,
+            "type": "categorization",
+            "title": "Category Recognition",
+            "buddyQuestion": "Which one is an ANIMAL?",
+            "referenceAsset": null,
+            "options": [
+                {
+                    "id": "school_q1_opt1",
+                    "asset": "cat.png",
+                    "label": "Cat",
+                    "isCorrect": true
+                },
+                {
+                    "id": "school_q1_opt2",
+                    "asset": "car_red.png",
+                    "label": "Car",
+                    "isCorrect": false
+                },
+                {
+                    "id": "school_q1_opt3",
+                    "asset": "flower.png",
+                    "label": "Flower",
+                    "isCorrect": false
+                }
+            ],
+            "branchWeight": 1
+        },
+        {
+            "id": "school_q2",
+            "branch": 1,
+            "type": "pattern_recognition",
+            "title": "Pattern Matching",
+            "buddyQuestion": "Which one is DIFFERENT from the others?",
+            "referenceAsset": null,
+            "options": [
+                {
+                    "id": "school_q2_opt1",
+                    "asset": "car_red.png",
+                    "label": "Car",
+                    "isCorrect": true
+                },
+                {
+                    "id": "school_q2_opt2",
+                    "asset": "cat.png",
+                    "label": "Cat",
+                    "isCorrect": false
+                },
+                {
+                    "id": "school_q2_opt3",
+                    "asset": "fish.png",
+                    "label": "Fish",
+                    "isCorrect": false
+                }
+            ],
+            "branchWeight": 1
+        },
+        {
+            "id": "school_q3",
+            "branch": 1,
+            "type": "association",
+            "title": "Logical Association",
+            "buddyQuestion": "A fish lives in...",
+            "referenceAsset": "fish.png",
+            "options": [
+                {
+                    "id": "school_q3_opt1",
+                    "asset": null,
+                    "label": "WATER",
+                    "isCorrect": true,
+                    "isTextOnly": true
+                },
+                {
+                    "id": "school_q3_opt2",
+                    "asset": null,
+                    "label": "TREE",
+                    "isCorrect": false,
+                    "isTextOnly": true
+                },
+                {
+                    "id": "school_q3_opt3",
+                    "asset": null,
+                    "label": "HOUSE",
+                    "isCorrect": false,
+                    "isTextOnly": true
+                }
+            ],
+            "branchWeight": 1
+        },
+        {
+            "id": "school_q4",
+            "branch": 2,
+            "type": "phonics",
+            "title": "Phonics Awareness",
+            "buddyQuestion": "Which word starts with the sound 'C'?",
+            "referenceAsset": null,
+            "targetSound": "C",
+            "options": [
+                {
+                    "id": "school_q4_opt1",
+                    "asset": "car_red.png",
+                    "label": "Car",
+                    "isCorrect": true
+                },
+                {
+                    "id": "school_q4_opt2",
+                    "asset": "fish.png",
+                    "label": "Fish",
+                    "isCorrect": false
+                },
+                {
+                    "id": "school_q4_opt3",
+                    "asset": "flower.png",
+                    "label": "Flower",
+                    "isCorrect": false
+                }
+            ],
+            "branchWeight": 2
+        },
+        {
+            "id": "school_q5",
+            "branch": 2,
+            "type": "sight_words",
+            "title": "Word Recognition",
+            "buddyQuestion": "Which word matches the picture?",
+            "referenceAsset": "cat.png",
+            "options": [
+                {
+                    "id": "school_q5_opt1",
+                    "asset": null,
+                    "label": "CAT",
+                    "isCorrect": true,
+                    "isTextOnly": true
+                },
+                {
+                    "id": "school_q5_opt2",
+                    "asset": null,
+                    "label": "CUT",
+                    "isCorrect": false,
+                    "isTextOnly": true
+                },
+                {
+                    "id": "school_q5_opt3",
+                    "asset": null,
+                    "label": "CAP",
+                    "isCorrect": false,
+                    "isTextOnly": true
+                }
+            ],
+            "branchWeight": 2
+        },
+        {
+            "id": "school_q6",
+            "branch": 2,
+            "type": "sequencing",
+            "title": "Sequencing Logic",
+            "buddyQuestion": "What is the correct order?",
+            "referenceAsset": null,
+            "sequenceCards": [
+                {
+                    "id": "seq_a",
+                    "asset": "apple_bitten.png",
+                    "label": "Bitten",
+                    "order": 2
+                },
+                {
+                    "id": "seq_b",
+                    "asset": "apple_whole.png",
+                    "label": "Whole",
+                    "order": 1
+                },
+                {
+                    "id": "seq_c",
+                    "asset": "apple_core.png",
+                    "label": "Core",
+                    "order": 3
+                }
+            ],
+            "options": [
+                {
+                    "id": "school_q6_opt1",
+                    "label": "B - A - C",
+                    "isCorrect": true
+                },
+                {
+                    "id": "school_q6_opt2",
+                    "label": "A - B - C",
+                    "isCorrect": false
+                },
+                {
+                    "id": "school_q6_opt3",
+                    "label": "C - B - A",
+                    "isCorrect": false
+                }
+            ],
+            "branchWeight": 2
+        },
+        {
+            "id": "school_q7",
+            "branch": 3,
+            "type": "reading_comprehension_simple",
+            "title": "Simple Reading",
+            "buddyQuestion": "What did the cat do?",
+            "referenceText": "The cat sat on the mat.",
+            "options": [
+                {
+                    "id": "school_q7_opt1",
+                    "asset": null,
+                    "label": "SAT",
+                    "isCorrect": true,
+                    "isTextOnly": true
+                },
+                {
+                    "id": "school_q7_opt2",
+                    "asset": null,
+                    "label": "RAN",
+                    "isCorrect": false,
+                    "isTextOnly": true
+                },
+                {
+                    "id": "school_q7_opt3",
+                    "asset": null,
+                    "label": "ATE",
+                    "isCorrect": false,
+                    "isTextOnly": true
+                }
+            ],
+            "branchWeight": 3
+        },
+        {
+            "id": "school_q8",
+            "branch": 3,
+            "type": "problem_solving",
+            "title": "Problem Solving",
+            "buddyQuestion": "If you have 2 apples and eat 1, how many are left?",
+            "referenceAsset": null,
+            "options": [
+                {
+                    "id": "school_q8_opt1",
+                    "asset": null,
+                    "label": "1",
+                    "isCorrect": true,
+                    "isTextOnly": true
+                },
+                {
+                    "id": "school_q8_opt2",
+                    "asset": null,
+                    "label": "2",
+                    "isCorrect": false,
+                    "isTextOnly": true
+                },
+                {
+                    "id": "school_q8_opt3",
+                    "asset": null,
+                    "label": "3",
+                    "isCorrect": false,
+                    "isTextOnly": true
+                }
+            ],
+            "branchWeight": 3
+        },
+        {
+            "id": "school_q9",
+            "branch": 3,
+            "type": "cause_effect",
+            "title": "Cause and Effect",
+            "buddyQuestion": "What happens when you water a flower?",
+            "referenceAsset": "flower.png",
+            "options": [
+                {
+                    "id": "school_q9_opt1",
+                    "asset": null,
+                    "label": "IT GROWS",
+                    "isCorrect": true,
+                    "isTextOnly": true
+                },
+                {
+                    "id": "school_q9_opt2",
+                    "asset": null,
+                    "label": "IT DIES",
+                    "isCorrect": false,
+                    "isTextOnly": true
+                },
+                {
+                    "id": "school_q9_opt3",
+                    "asset": null,
+                    "label": "IT FLIES",
+                    "isCorrect": false,
+                    "isTextOnly": true
+                }
+            ],
+            "branchWeight": 3
+        }
+    ],
+    "scoring": {
+        "levelMapping": [
+            {
+                "level": 0,
+                "name": "Pre-School",
+                "condition": "Total correct < 3",
+                "curriculum": "Basic Skills Review"
+            },
+            {
+                "level": 1,
+                "name": "Beginner",
+                "condition": "Branch 1 >= 2",
+                "curriculum": "Categories, Patterns, Associations"
+            },
+            {
+                "level": 2,
+                "name": "Intermediate",
+                "condition": "Branch 1 >= 2 AND Branch 2 >= 2",
+                "curriculum": "Phonics, Reading, Sequencing"
+            },
+            {
+                "level": 3,
+                "name": "Advanced",
+                "condition": "All branches >= 2",
+                "curriculum": "Comprehension, Problem Solving, Logic"
+            }
+        ]
+    }
+}

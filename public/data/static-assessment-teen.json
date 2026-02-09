@@ -1,0 +1,315 @@
+{
+    "assessment_id": "static_level_test_teen_v1",
+    "version": "1.0.0",
+    "ageGroup": "teen",
+    "metadata": {
+        "title": "Level Assessment - Teen (13+ years)",
+        "description": "Functional and social skills assessment for teenagers",
+        "totalQuestions": 9,
+        "targetAge": "13+"
+    },
+    "questions": [
+        {
+            "id": "teen_q1",
+            "branch": 1,
+            "type": "symbol_recognition",
+            "title": "Symbol Recognition",
+            "buddyQuestion": "What does this sign mean?",
+            "referenceAsset": "sign_stop.png",
+            "options": [
+                {
+                    "id": "teen_q1_opt1",
+                    "asset": null,
+                    "label": "STOP",
+                    "isCorrect": true,
+                    "isTextOnly": true
+                },
+                {
+                    "id": "teen_q1_opt2",
+                    "asset": null,
+                    "label": "GO",
+                    "isCorrect": false,
+                    "isTextOnly": true
+                },
+                {
+                    "id": "teen_q1_opt3",
+                    "asset": null,
+                    "label": "WAIT",
+                    "isCorrect": false,
+                    "isTextOnly": true
+                }
+            ],
+            "branchWeight": 1
+        },
+        {
+            "id": "teen_q2",
+            "branch": 1,
+            "type": "weather_recognition",
+            "title": "Weather Recognition",
+            "buddyQuestion": "What kind of weather is this?",
+            "referenceAsset": "weather_snowy.png",
+            "options": [
+                {
+                    "id": "teen_q2_opt1",
+                    "asset": null,
+                    "label": "SNOWY",
+                    "isCorrect": true,
+                    "isTextOnly": true
+                },
+                {
+                    "id": "teen_q2_opt2",
+                    "asset": null,
+                    "label": "SUNNY",
+                    "isCorrect": false,
+                    "isTextOnly": true
+                },
+                {
+                    "id": "teen_q2_opt3",
+                    "asset": null,
+                    "label": "RAINY",
+                    "isCorrect": false,
+                    "isTextOnly": true
+                }
+            ],
+            "branchWeight": 1
+        },
+        {
+            "id": "teen_q3",
+            "branch": 1,
+            "type": "clothing_matching",
+            "title": "Appropriate Clothing",
+            "buddyQuestion": "What should you wear when it's snowing?",
+            "referenceAsset": "weather_snowy.png",
+            "options": [
+                {
+                    "id": "teen_q3_opt1",
+                    "asset": "coat_red.png",
+                    "label": "Winter Coat",
+                    "isCorrect": true
+                },
+                {
+                    "id": "teen_q3_opt2",
+                    "asset": "weather_sunny.png",
+                    "label": "Sunglasses",
+                    "isCorrect": false
+                },
+                {
+                    "id": "teen_q3_opt3",
+                    "asset": "icon_person_running.png",
+                    "label": "Shorts",
+                    "isCorrect": false
+                }
+            ],
+            "branchWeight": 1
+        },
+        {
+            "id": "teen_q4",
+            "branch": 2,
+            "type": "action_recognition",
+            "title": "Action Recognition",
+            "buddyQuestion": "What is this person doing?",
+            "referenceAsset": "icon_person_running.png",
+            "options": [
+                {
+                    "id": "teen_q4_opt1",
+                    "asset": null,
+                    "label": "RUNNING",
+                    "isCorrect": true,
+                    "isTextOnly": true
+                },
+                {
+                    "id": "teen_q4_opt2",
+                    "asset": null,
+                    "label": "STANDING",
+                    "isCorrect": false,
+                    "isTextOnly": true
+                },
+                {
+                    "id": "teen_q4_opt3",
+                    "asset": null,
+                    "label": "EATING",
+                    "isCorrect": false,
+                    "isTextOnly": true
+                }
+            ],
+            "branchWeight": 2
+        },
+        {
+            "id": "teen_q5",
+            "branch": 2,
+            "type": "safety_behavior",
+            "title": "Safety Behavior",
+            "buddyQuestion": "What should you do when you see a STOP sign?",
+            "referenceAsset": "sign_stop.png",
+            "options": [
+                {
+                    "id": "teen_q5_opt1",
+                    "asset": "icon_person_standing.png",
+                    "label": "Stop",
+                    "isCorrect": true
+                },
+                {
+                    "id": "teen_q5_opt2",
+                    "asset": "icon_person_running.png",
+                    "label": "Run",
+                    "isCorrect": false
+                },
+                {
+                    "id": "teen_q5_opt3",
+                    "asset": "icon_person_eating.png",
+                    "label": "Eat",
+                    "isCorrect": false
+                }
+            ],
+            "branchWeight": 2
+        },
+        {
+            "id": "teen_q6",
+            "branch": 2,
+            "type": "reading_comprehension_basic",
+            "title": "Basic Reading",
+            "buddyQuestion": "What is the weather like?",
+            "referenceText": "It is snowing outside. The ground is white.",
+            "options": [
+                {
+                    "id": "teen_q6_opt1",
+                    "asset": "weather_snowy.png",
+                    "label": "Snowy",
+                    "isCorrect": true
+                },
+                {
+                    "id": "teen_q6_opt2",
+                    "asset": "weather_sunny.png",
+                    "label": "Sunny",
+                    "isCorrect": false
+                },
+                {
+                    "id": "teen_q6_opt3",
+                    "asset": "coat_red.png",
+                    "label": "Red",
+                    "isCorrect": false
+                }
+            ],
+            "branchWeight": 2
+        },
+        {
+            "id": "teen_q7",
+            "branch": 3,
+            "type": "emotion_recognition",
+            "title": "Emotion Recognition",
+            "buddyQuestion": "The person dropped their ice cream. How do they feel?",
+            "referenceAsset": "child_dropped_icecream.png",
+            "visualStyle": "realistic",
+            "options": [
+                {
+                    "id": "teen_q7_opt1",
+                    "asset": "emoji_sad.png",
+                    "label": "Sad",
+                    "isCorrect": true
+                },
+                {
+                    "id": "teen_q7_opt2",
+                    "asset": "emoji_happy.png",
+                    "label": "Happy",
+                    "isCorrect": false
+                },
+                {
+                    "id": "teen_q7_opt3",
+                    "asset": "emoji_scared.png",
+                    "label": "Scared",
+                    "isCorrect": false
+                }
+            ],
+            "branchWeight": 3
+        },
+        {
+            "id": "teen_q8",
+            "branch": 3,
+            "type": "reading_comprehension_advanced",
+            "title": "Reading Comprehension",
+            "buddyQuestion": "Why did Mike wear a coat?",
+            "referenceText": "Mike put on his red coat because it was snowing outside.",
+            "visualStyle": "realistic",
+            "options": [
+                {
+                    "id": "teen_q8_opt1",
+                    "asset": "weather_snowy.png",
+                    "label": "It was snowing",
+                    "isCorrect": true
+                },
+                {
+                    "id": "teen_q8_opt2",
+                    "asset": "coat_red.png",
+                    "label": "The coat was red",
+                    "isCorrect": false,
+                    "errorType": "hyperlexia_trap"
+                },
+                {
+                    "id": "teen_q8_opt3",
+                    "asset": "weather_sunny.png",
+                    "label": "It was sunny",
+                    "isCorrect": false
+                }
+            ],
+            "branchWeight": 3
+        },
+        {
+            "id": "teen_q9",
+            "branch": 3,
+            "type": "social_inference",
+            "title": "Social Inference",
+            "buddyQuestion": "If someone looks sad, what should you do?",
+            "referenceAsset": "emoji_sad.png",
+            "visualStyle": "realistic",
+            "options": [
+                {
+                    "id": "teen_q9_opt1",
+                    "asset": "icon_help.png",
+                    "label": "Help them",
+                    "isCorrect": true
+                },
+                {
+                    "id": "teen_q9_opt2",
+                    "asset": "icon_laugh.png",
+                    "label": "Laugh at them",
+                    "isCorrect": false
+                },
+                {
+                    "id": "teen_q9_opt3",
+                    "asset": "icon_ignore.png",
+                    "label": "Ignore them",
+                    "isCorrect": false
+                }
+            ],
+            "branchWeight": 3
+        }
+    ],
+    "scoring": {
+        "levelMapping": [
+            {
+                "level": 0,
+                "name": "Pre-School",
+                "condition": "Total correct < 3",
+                "curriculum": "Basic Skills Review"
+            },
+            {
+                "level": 1,
+                "name": "Beginner",
+                "condition": "Branch 1 >= 2",
+                "curriculum": "Symbols, Weather, Daily Living"
+            },
+            {
+                "level": 2,
+                "name": "Intermediate",
+                "condition": "Branch 1 >= 2 AND Branch 2 >= 2",
+                "curriculum": "Safety, Actions, Basic Reading"
+            },
+            {
+                "level": 3,
+                "name": "Advanced",
+                "condition": "All branches >= 2",
+                "curriculum": "Emotions, Comprehension, Social Skills"
+            }
+        ]
+    }
+}

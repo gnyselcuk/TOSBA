@@ -1,0 +1,8 @@
+{
+  "name": "TOSBA - Educational Companion",
+  "description": "A GenAI-powered, hyper-personalized literacy learning platform for autistic individuals, featuring real-time voice interaction and custom character generation.",
+  "requestFramePermissions": [
+    "microphone",
+    "camera"
+  ]
+}

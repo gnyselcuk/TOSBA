@@ -1,0 +1,305 @@
+{
+    "assessment_id": "static_level_test_early_v1",
+    "version": "1.0.0",
+    "ageGroup": "early",
+    "metadata": {
+        "title": "Level Assessment - Early Childhood (3-6 years)",
+        "description": "Basic skills assessment for young children",
+        "totalQuestions": 9,
+        "targetAge": "3-6"
+    },
+    "questions": [
+        {
+            "id": "early_q1",
+            "branch": 1,
+            "type": "matching",
+            "title": "Exact Matching",
+            "buddyQuestion": "Which one is the SAME as this?",
+            "referenceAsset": "apple_red.png",
+            "options": [
+                {
+                    "id": "early_q1_opt1",
+                    "asset": "apple_red.png",
+                    "label": "Red Apple",
+                    "isCorrect": true
+                },
+                {
+                    "id": "early_q1_opt2",
+                    "asset": "apple_green.png",
+                    "label": "Green Apple",
+                    "isCorrect": false
+                },
+                {
+                    "id": "early_q1_opt3",
+                    "asset": "ball_red.png",
+                    "label": "Red Ball",
+                    "isCorrect": false
+                }
+            ],
+            "branchWeight": 1
+        },
+        {
+            "id": "early_q2",
+            "branch": 1,
+            "type": "categorization",
+            "title": "Food Category",
+            "buddyQuestion": "Which one can you EAT?",
+            "referenceAsset": null,
+            "options": [
+                {
+                    "id": "early_q2_opt1",
+                    "asset": "banana.png",
+                    "label": "Banana",
+                    "isCorrect": true
+                },
+                {
+                    "id": "early_q2_opt2",
+                    "asset": "car_toy.png",
+                    "label": "Car",
+                    "isCorrect": false
+                },
+                {
+                    "id": "early_q2_opt3",
+                    "asset": "sock.png",
+                    "label": "Sock",
+                    "isCorrect": false
+                }
+            ],
+            "branchWeight": 1
+        },
+        {
+            "id": "early_q3",
+            "branch": 1,
+            "type": "association",
+            "title": "What Goes Together",
+            "buddyQuestion": "What goes with the shoe?",
+            "referenceAsset": "shoe_sport.png",
+            "options": [
+                {
+                    "id": "early_q3_opt1",
+                    "asset": "sock.png",
+                    "label": "Sock",
+                    "isCorrect": true
+                },
+                {
+                    "id": "early_q3_opt2",
+                    "asset": "spoon.png",
+                    "label": "Spoon",
+                    "isCorrect": false
+                },
+                {
+                    "id": "early_q3_opt3",
+                    "asset": "ball_colorful.png",
+                    "label": "Ball",
+                    "isCorrect": false
+                }
+            ],
+            "branchWeight": 1
+        },
+        {
+            "id": "early_q4",
+            "branch": 2,
+            "type": "color_recognition",
+            "title": "Color Matching",
+            "buddyQuestion": "Find another RED thing!",
+            "referenceAsset": "apple_red.png",
+            "options": [
+                {
+                    "id": "early_q4_opt1",
+                    "asset": "ball_red.png",
+                    "label": "Red Ball",
+                    "isCorrect": true
+                },
+                {
+                    "id": "early_q4_opt2",
+                    "asset": "apple_green.png",
+                    "label": "Green Apple",
+                    "isCorrect": false
+                },
+                {
+                    "id": "early_q4_opt3",
+                    "asset": "banana.png",
+                    "label": "Yellow Banana",
+                    "isCorrect": false
+                }
+            ],
+            "branchWeight": 2
+        },
+        {
+            "id": "early_q5",
+            "branch": 2,
+            "type": "size_comparison",
+            "title": "Big and Small",
+            "buddyQuestion": "Which one is BIGGER?",
+            "referenceAsset": null,
+            "options": [
+                {
+                    "id": "early_q5_opt1",
+                    "asset": "car_toy.png",
+                    "label": "Car",
+                    "isCorrect": true
+                },
+                {
+                    "id": "early_q5_opt2",
+                    "asset": "spoon.png",
+                    "label": "Spoon",
+                    "isCorrect": false
+                },
+                {
+                    "id": "early_q5_opt3",
+                    "asset": "sock.png",
+                    "label": "Sock",
+                    "isCorrect": false
+                }
+            ],
+            "branchWeight": 2
+        },
+        {
+            "id": "early_q6",
+            "branch": 2,
+            "type": "counting",
+            "title": "Simple Counting",
+            "buddyQuestion": "How many apples do you see?",
+            "referenceAsset": "apple_red.png",
+            "options": [
+                {
+                    "id": "early_q6_opt1",
+                    "asset": null,
+                    "label": "1",
+                    "isCorrect": true,
+                    "isTextOnly": true
+                },
+                {
+                    "id": "early_q6_opt2",
+                    "asset": null,
+                    "label": "2",
+                    "isCorrect": false,
+                    "isTextOnly": true
+                },
+                {
+                    "id": "early_q6_opt3",
+                    "asset": null,
+                    "label": "3",
+                    "isCorrect": false,
+                    "isTextOnly": true
+                }
+            ],
+            "branchWeight": 2
+        },
+        {
+            "id": "early_q7",
+            "branch": 3,
+            "type": "function_recognition",
+            "title": "What Do We Use It For",
+            "buddyQuestion": "What do we use to eat?",
+            "referenceAsset": null,
+            "options": [
+                {
+                    "id": "early_q7_opt1",
+                    "asset": "spoon.png",
+                    "label": "Spoon",
+                    "isCorrect": true
+                },
+                {
+                    "id": "early_q7_opt2",
+                    "asset": "sock.png",
+                    "label": "Sock",
+                    "isCorrect": false
+                },
+                {
+                    "id": "early_q7_opt3",
+                    "asset": "ball_colorful.png",
+                    "label": "Ball",
+                    "isCorrect": false
+                }
+            ],
+            "branchWeight": 3
+        },
+        {
+            "id": "early_q8",
+            "branch": 3,
+            "type": "sequence_simple",
+            "title": "What Comes Next",
+            "buddyQuestion": "What happens after we eat the apple?",
+            "referenceAsset": "apple_whole.png",
+            "options": [
+                {
+                    "id": "early_q8_opt1",
+                    "asset": "apple_bitten.png",
+                    "label": "Bitten Apple",
+                    "isCorrect": true
+                },
+                {
+                    "id": "early_q8_opt2",
+                    "asset": "banana.png",
+                    "label": "Banana",
+                    "isCorrect": false
+                },
+                {
+                    "id": "early_q8_opt3",
+                    "asset": "ball_red.png",
+                    "label": "Ball",
+                    "isCorrect": false
+                }
+            ],
+            "branchWeight": 3
+        },
+        {
+            "id": "early_q9",
+            "branch": 3,
+            "type": "body_parts",
+            "title": "Body Parts",
+            "buddyQuestion": "What do we wear on our FEET?",
+            "referenceAsset": null,
+            "options": [
+                {
+                    "id": "early_q9_opt1",
+                    "asset": "shoe_sport.png",
+                    "label": "Shoe",
+                    "isCorrect": true
+                },
+                {
+                    "id": "early_q9_opt2",
+                    "asset": "spoon.png",
+                    "label": "Spoon",
+                    "isCorrect": false
+                },
+                {
+                    "id": "early_q9_opt3",
+                    "asset": "car_toy.png",
+                    "label": "Car",
+                    "isCorrect": false
+                }
+            ],
+            "branchWeight": 3
+        }
+    ],
+    "scoring": {
+        "levelMapping": [
+            {
+                "level": 0,
+                "name": "Pre-School",
+                "condition": "Total correct < 3",
+                "curriculum": "Sensory & Touch Activities"
+            },
+            {
+                "level": 1,
+                "name": "Beginner",
+                "condition": "Branch 1 >= 2",
+                "curriculum": "Matching, PECS, Colors, Shapes"
+            },
+            {
+                "level": 2,
+                "name": "Intermediate",
+                "condition": "Branch 1 >= 2 AND Branch 2 >= 2",
+                "curriculum": "Basic Concepts, Counting, Categories"
+            },
+            {
+                "level": 3,
+                "name": "Advanced",
+                "condition": "All branches >= 2",
+                "curriculum": "Functions, Sequences, Body Awareness"
+            }
+        ]
+    }
+}
