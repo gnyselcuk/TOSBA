@@ -155,6 +155,7 @@ const WelcomeScreen: React.FC = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-6 text-center">
       <div className="mb-8">
+        <img src="/images/tosba_mascot.png" alt="TOSBA Mascot" className="w-64 mx-auto mb-6 animate-bounce-slow drop-shadow-xl" />
         <h1 className="text-4xl font-bold text-sky-600 mb-2">TOSBA</h1>
         <p className="text-slate-500">Parent Onboarding</p>
       </div>

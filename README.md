@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="public/images/tosba_mascot.png" alt="TOSBA Mascot" width="300" />
+
 # 🐢 TOSBA
 
 ### External Attention Mechanism & GenAI Adaptation in Autism Education
