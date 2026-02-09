@@ -41,8 +41,9 @@ import type { SessionContext } from './liveService';
  * This does NOT trigger speech - it just informs the buddy
  */
 export const updateBuddyContext = (context: Partial<SessionContext>) => {
-    const liveService = getGlobalLiveService();
-    if (liveService) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const liveService = getGlobalLiveService() as any;
+    if (liveService && typeof liveService.updateContext === 'function') {
         liveService.updateContext(context);
     }
 };
@@ -52,8 +53,9 @@ export const updateBuddyContext = (context: Partial<SessionContext>) => {
  * Useful during focus activities like reading or puzzle solving
  */
 export const setBuddyQuietMode = (quiet: boolean) => {
-    const liveService = getGlobalLiveService();
-    if (liveService) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const liveService = getGlobalLiveService() as any;
+    if (liveService && typeof liveService.setQuietMode === 'function') {
         liveService.setQuietMode(quiet);
     }
 };
@@ -62,8 +64,9 @@ export const setBuddyQuietMode = (quiet: boolean) => {
  * Trigger encouragement from buddy based on context
  */
 export const triggerBuddyEncouragement = (type: 'celebrate' | 'help' | 'motivate') => {
-    const liveService = getGlobalLiveService();
-    if (liveService) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const liveService = getGlobalLiveService() as any;
+    if (liveService && typeof liveService.triggerEncouragement === 'function') {
         liveService.triggerEncouragement(type);
     }
 };

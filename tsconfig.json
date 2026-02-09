@@ -1,4 +1,16 @@
 {
+  "include": [
+    "**/*",
+    ".eslintrc.cjs"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "**/*.spec.ts",
+    "**/*.spec.tsx",
+    "src/test"
+  ],
   "compilerOptions": {
     "target": "ES2022",
     "experimentalDecorators": true,

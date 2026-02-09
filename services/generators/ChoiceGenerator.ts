@@ -110,7 +110,7 @@ export class ChoiceGenerator extends BaseGenerator {
             template: 'CHOICE',
             instruction: data.instruction as string,
             backgroundTheme: data.backgroundTheme as string,
-            backgroundImage: finalBackgroundImage,
+            backgroundImage: finalBackgroundImage as string | undefined,
             scenarioText: data.scenarioText as string | undefined,
             items: finalItems
         };

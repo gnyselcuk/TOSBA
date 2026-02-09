@@ -253,14 +253,14 @@ const StaticAssessmentSession: React.FC = () => {
                 // Determine which assessment to load based on chronological age
                 const age = profile?.chronologicalAge || 5;
                 let assessmentFile = 'static-assessment-early.json'; // Default: 3-6 years
-                
+
                 if (age >= 13) {
                     assessmentFile = 'static-assessment-teen.json'; // 13+ years
                 } else if (age >= 7) {
                     assessmentFile = 'static-assessment-school.json'; // 7-12 years
                 }
 
-                console.log(`[Assessment] Loading ${assessmentFile} for age ${age}`);
+
 
                 const response = await fetch(`/data/${assessmentFile}`);
                 const data: AssessmentData = await response.json();
@@ -400,7 +400,7 @@ const StaticAssessmentSession: React.FC = () => {
                     } else if (idx < currentIndex) {
                         bgColor = answers[q.id] ? '#22c55e' : '#94a3b8';
                     }
-                    
+
                     return (
                         <div
                             key={q.id}

@@ -241,7 +241,7 @@ const DailyAdventureLogContent: React.FC = () => {
         setActiveWordIndex(-1);
 
         try {
-            // @ts-expect-error - playAudioData return type needs proper typing
+
             const result = await playAudioData(base64Audio);
             const source = result.source;
             const duration = result.duration;
@@ -321,7 +321,7 @@ const DailyAdventureLogContent: React.FC = () => {
                 </button>
 
                 {/* Larger Book */}
-                {/* @ts-expect-error - HTMLFlipBook types are not fully compatible */}
+
                 <HTMLFlipBook
                     ref={flipBookRef}
                     width={500}

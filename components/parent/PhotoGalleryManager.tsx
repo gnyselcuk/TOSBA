@@ -79,23 +79,19 @@ export const PhotoGalleryManager: React.FC = () => {
         }
     };
 
-    const handleAssignToSchedule = async (photo: UserPhoto) => {
-        if (!photo.detectedObjects || photo.detectedObjects.length === 0) {
-            alert("No objects detected in this photo!");
-            return;
-        }
+    // Helper for checking if duplicate
+    const isSameBox = (box1?: number[], box2?: number[]) => {
+        if (!box1 || !box2) return false;
+        return box1[0] === box2[0] && box1[1] === box2[1] && box1[2] === box2[2] && box1[3] === box2[3];
+    };
 
-        const moduleId = `photo_game_${Date.now()}`;
-        const targets = photo.detectedObjects;
-
-        // Create 5 questions - each targeting a different object
-        const questions: GamePayload[] = [];
+    const createGamePayload = (moduleId: string, photo: UserPhoto, instruction: string): GamePayload => {
+        const targets = photo.detectedObjects || [];
         const TARGET_QUESTIONS = 5;
+        const questions: GamePayload[] = [];
 
         for (let i = 0; i < TARGET_QUESTIONS; i++) {
-            // Cycle through objects if we have fewer than 5
             const correctObj = targets[i % targets.length];
-
             questions.push({
                 id: `q_${i}_${Date.now()}`,
                 template: 'TAP_TRACK',
@@ -106,31 +102,35 @@ export const PhotoGalleryManager: React.FC = () => {
                 items: targets.map((obj, idx) => ({
                     id: `obj_${idx}_${i}_${Date.now()}`,
                     name: obj.label || obj.name,
-                    isCorrect: (obj.box2d?.[0] === correctObj.box2d?.[0] &&
-                        obj.box2d?.[1] === correctObj.box2d?.[1] &&
-                        obj.box2d?.[2] === correctObj.box2d?.[2] &&
-                        obj.box2d?.[3] === correctObj.box2d?.[3]),
-                    boundingBox: obj.box2d // [ymin, xmin, ymax, xmax]
+                    isCorrect: isSameBox(obj.box2d, correctObj.box2d),
+                    boundingBox: obj.box2d
                 }))
             });
         }
 
-        // Create wrapper payload with questions array
-        const payload: GamePayload = {
+        return {
             id: moduleId,
             template: 'TAP_TRACK',
             backgroundTheme: 'Real World Photo',
             backgroundImage: photo.base64,
-            instruction: 'Find objects in your photo!',
+            instruction,
             spawnMode: 'STATIC',
             items: [],
-            questions: questions // This is the key - pack of 5 questions
+            questions
         };
+    };
 
-        // Cache Game Content
+    const handleAssignToSchedule = async (photo: UserPhoto) => {
+        if (!photo.detectedObjects || photo.detectedObjects.length === 0) {
+            alert("No objects detected in this photo!");
+            return;
+        }
+
+        const moduleId = `photo_game_${Date.now()}`;
+        const payload = createGamePayload(moduleId, photo, 'Find objects in your photo!');
+
         await db.cache.setGame(moduleId, payload);
 
-        // Create Module
         const newModule: CurriculumModule = {
             id: moduleId,
             title: `Photo Hunt: ${photo.category}`,
@@ -141,10 +141,7 @@ export const PhotoGalleryManager: React.FC = () => {
             visualStyle: 'Realistic'
         };
 
-        // Update Store: Add to Schedule
         addCustomHomeworkModule(newModule);
-
-        // Visual Feedback
         alert("Game added to Child's Schedule! They can play it in their dashboard.");
     };
 
@@ -155,51 +152,10 @@ export const PhotoGalleryManager: React.FC = () => {
         }
 
         const moduleId = `photo_game_${Date.now()}`;
-        const targets = photo.detectedObjects;
+        const payload = createGamePayload(moduleId, photo, 'Find objects in your photo!');
 
-        // Create 5 questions - each targeting a different object
-        const questions: GamePayload[] = [];
-        const TARGET_QUESTIONS = 5;
-
-        for (let i = 0; i < TARGET_QUESTIONS; i++) {
-            // Cycle through objects if we have fewer than 5
-            const correctObj = targets[i % targets.length];
-
-            questions.push({
-                id: `q_${i}_${Date.now()}`,
-                template: 'TAP_TRACK',
-                backgroundTheme: 'Real World Photo',
-                backgroundImage: photo.base64,
-                instruction: `Find the ${correctObj.label || correctObj.name}!`,
-                spawnMode: 'STATIC',
-                items: targets.map((obj, idx) => ({
-                    id: `obj_${idx}_${i}_${Date.now()}`,
-                    name: obj.label || obj.name,
-                    isCorrect: (obj.box2d?.[0] === correctObj.box2d?.[0] &&
-                        obj.box2d?.[1] === correctObj.box2d?.[1] &&
-                        obj.box2d?.[2] === correctObj.box2d?.[2] &&
-                        obj.box2d?.[3] === correctObj.box2d?.[3]),
-                    boundingBox: obj.box2d // [ymin, xmin, ymax, xmax]
-                }))
-            });
-        }
-
-        // Create wrapper payload with questions array
-        const payload: GamePayload = {
-            id: moduleId,
-            template: 'TAP_TRACK',
-            backgroundTheme: 'Real World Photo',
-            backgroundImage: photo.base64,
-            instruction: 'Find objects in your photo!',
-            spawnMode: 'STATIC',
-            items: [],
-            questions: questions // This is the key - pack of 5 questions
-        };
-
-        // Cache Game Content
         await db.cache.setGame(moduleId, payload);
 
-        // Create Module
         const newModule: CurriculumModule = {
             id: moduleId,
             title: `Testing: ${photo.category}`,
@@ -210,9 +166,40 @@ export const PhotoGalleryManager: React.FC = () => {
             visualStyle: 'Realistic'
         };
 
-        // Update Store
-        setActiveModule(newModule); // Set as current
-        setStage(AppStage.GAME_ARENA); // Launch Game Immediately
+        setActiveModule(newModule);
+        setStage(AppStage.GAME_ARENA);
+    };
+
+    const renderUploadContent = () => {
+        if (isAnalyzing) {
+            return (
+                <div className="flex flex-col items-center animate-pulse">
+                    <span className="text-2xl mb-2">🧠</span>
+                    <span className="text-amber-600 font-bold">AI is analyzing objects...</span>
+                </div>
+            );
+        }
+        if (isDragging) {
+            return (
+                <div className="flex flex-col items-center">
+                    <span className="text-4xl mb-2 animate-bounce">📸</span>
+                    <span className="text-green-600 font-bold text-lg">Drop photo here!</span>
+                </div>
+            );
+        }
+        return (
+            <div className="flex flex-col items-center">
+                <span className="text-4xl mb-2 text-indigo-300">+</span>
+                <span className="text-indigo-600 font-bold">Add Photo to {selectedCategory}</span>
+                <span className="text-xs text-indigo-400 mt-1">Click to upload or drag & drop</span>
+            </div>
+        );
+    };
+
+    const getUploadAreaClass = () => {
+        if (isAnalyzing) return 'border-amber-400 bg-amber-50 cursor-wait';
+        if (isDragging) return 'border-green-400 bg-green-50 scale-105 shadow-lg';
+        return 'border-indigo-200 hover:bg-indigo-50 hover:border-indigo-400';
     };
 
     return (
@@ -249,14 +236,7 @@ export const PhotoGalleryManager: React.FC = () => {
                 onDragLeave={handleDragLeave}
                 onDragOver={handleDragOver}
                 onDrop={handleDrop}
-                className={`mt-4 border-2 border-dashed rounded-2xl p-8 text-center cursor-pointer transition-all duration-200
-                    ${isAnalyzing
-                        ? 'border-amber-400 bg-amber-50 cursor-wait'
-                        : isDragging
-                            ? 'border-green-400 bg-green-50 scale-105 shadow-lg'
-                            : 'border-indigo-200 hover:bg-indigo-50 hover:border-indigo-400'
-                    }
-                `}
+                className={`mt-4 border-2 border-dashed rounded-2xl p-8 text-center cursor-pointer transition-all duration-200 ${getUploadAreaClass()}`}
             >
                 <input
                     type="file"
@@ -266,24 +246,7 @@ export const PhotoGalleryManager: React.FC = () => {
                     onChange={handleFileSelect}
                     disabled={isAnalyzing}
                 />
-
-                {isAnalyzing ? (
-                    <div className="flex flex-col items-center animate-pulse">
-                        <span className="text-2xl mb-2">🧠</span>
-                        <span className="text-amber-600 font-bold">AI is analyzing objects...</span>
-                    </div>
-                ) : isDragging ? (
-                    <div className="flex flex-col items-center">
-                        <span className="text-4xl mb-2 animate-bounce">📸</span>
-                        <span className="text-green-600 font-bold text-lg">Drop photo here!</span>
-                    </div>
-                ) : (
-                    <div className="flex flex-col items-center">
-                        <span className="text-4xl mb-2 text-indigo-300">+</span>
-                        <span className="text-indigo-600 font-bold">Add Photo to {selectedCategory}</span>
-                        <span className="text-xs text-indigo-400 mt-1">Click to upload or drag & drop</span>
-                    </div>
-                )}
+                {renderUploadContent()}
             </div>
 
             {/* Gallery Grid */}

@@ -84,7 +84,7 @@ export class TapTrackGenerator extends BaseGenerator {
             template: 'TAP_TRACK',
             instruction: data.instruction,
             backgroundTheme: data.backgroundTheme,
-            spawnMode: data.spawnMode || 'STATIC',
+            spawnMode: (data.spawnMode as 'FALLING' | 'FLOATING' | 'STATIC') || 'STATIC',
             items: finalItems
         };
     }

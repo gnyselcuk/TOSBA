@@ -1,5 +1,5 @@
 
-import { GamePayload, AssessmentItem, ModuleType, UserProfile, Curriculum, AssessmentQuestion, UserPhoto, StoryBook, ShopScenario, DetectedObject } from "../types";
+import { GamePayload, AssessmentItem, ModuleType, UserProfile, Curriculum, AssessmentQuestion, UserPhoto, StoryBook, ShopScenario, DetectedObject, Blueprint } from "../types";
 import { JudgeService } from "./judgeService";
 import { DragDropGenerator } from "./generators/DragDropGenerator";
 import { TapTrackGenerator } from "./generators/TapTrackGenerator";
@@ -197,8 +197,8 @@ export const generateBuddyImage = async (description: string, style: string, ref
 // Helper to stop any playing audio
 export const stopBuddySpeech = () => {
     if (currentAudioSource) {
-        try { 
-            currentAudioSource.stop(); 
+        try {
+            currentAudioSource.stop();
         } catch {
             // Ignore errors when stopping audio
         }
@@ -329,8 +329,8 @@ async function playRawAudio(base64Data: string) {
 
     // Resume context if needed
     if (ttsAudioContext.state === 'suspended') {
-        try { 
-            await ttsAudioContext.resume(); 
+        try {
+            await ttsAudioContext.resume();
         } catch (error) {
             console.warn('Audio resume blocked (autoplay policy)', error);
         }
@@ -962,6 +962,6 @@ export const shuffleArray = <T>(array: T[]): T[] => {
 
 // --- FUSION BLUEPRINT GENERATOR ---
 // Delegated to FusionBlueprintGenerator module
-export const generateFusionBlueprint = async (interest: string): Promise<unknown> => {
+export const generateFusionBlueprint = async (interest: string): Promise<Blueprint | null> => {
     return fusionBlueprintGenerator.generate(interest);
 };

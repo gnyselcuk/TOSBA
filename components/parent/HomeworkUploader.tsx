@@ -237,6 +237,199 @@ export const HomeworkUploader: React.FC = () => {
         }
     };
 
+    const renderSuccessMessage = () => {
+        if (!success) return null;
+        return (
+            <div className="mb-6 p-4 bg-green-50 text-green-700 rounded-xl flex items-center border-2 border-green-300">
+                <span className="text-2xl mr-3">✅</span>
+                <div>
+                    <strong className="text-lg">Success!</strong>
+                    <p className="text-sm">The homework game has been added to the mission map. Check the dashboard!</p>
+                </div>
+            </div>
+        );
+    };
+
+    const renderUploadBox = () => (
+        <div
+            onClick={() => fileInputRef.current?.click()}
+            onDragEnter={handleDragEnter}
+            onDragLeave={handleDragLeave}
+            onDragOver={handleDragOver}
+            onDrop={handleDrop}
+            className={`border-2 border-dashed rounded-xl p-8 text-center cursor-pointer transition-all duration-200
+                ${isDragging
+                    ? 'border-green-400 bg-green-50 scale-105 shadow-lg'
+                    : 'border-slate-300 hover:bg-slate-50 hover:border-indigo-300'
+                }
+            `}
+        >
+            {isDragging ? (
+                <>
+                    <span className="text-4xl mb-2 block animate-bounce">📚</span>
+                    <span className="font-bold text-green-600 text-lg">Drop homework here!</span>
+                </>
+            ) : (
+                <>
+                    <span className="text-4xl mb-2 block">📤</span>
+                    <span className="font-bold text-slate-600">Click to Upload Homework</span>
+                    <p className="text-xs text-slate-400 mt-1">Click to upload or drag & drop • Supports JPG, PNG</p>
+                </>
+            )}
+            <input
+                ref={fileInputRef}
+                type="file"
+                accept="image/*"
+                className="hidden"
+                onChange={handleFileSelect}
+            />
+        </div>
+    );
+
+    const renderAnalysisPreview = () => {
+        if (!analysis) return null;
+
+        return (
+            <div className="animate-fade-in-up">
+                <div className="bg-gradient-to-br from-indigo-50 to-purple-50 p-5 rounded-2xl border-2 border-indigo-200 mb-4 shadow-sm">
+                    <div className="flex justify-between items-start mb-3">
+                        <span className="text-xs font-bold uppercase text-indigo-400 tracking-wider">✨ DETECTED CONTENT</span>
+                        <div className="flex gap-2">
+                            <span className="bg-indigo-500 text-white text-xs px-3 py-1 rounded-full font-bold">{analysis.subject}</span>
+                            <span className="bg-purple-500 text-white text-xs px-3 py-1 rounded-full font-bold">{analysis.ageGroup}</span>
+                        </div>
+                    </div>
+                    <h4 className="font-bold text-xl text-indigo-900 mb-2">{analysis.topic}</h4>
+                    <p className="text-sm text-indigo-700 mb-4 leading-relaxed">{analysis.summary}</p>
+
+                    <div className="flex items-center text-xs font-bold text-indigo-600 space-x-4 bg-white/50 rounded-lg p-3">
+                        <span className="flex items-center">
+                            🎮 Game: <span className="ml-1 text-indigo-800">{analysis.suggestedGameTemplate.replace('_', ' ')}</span>
+                        </span>
+                        <span className="flex items-center">
+                            📊 Level: <span className="ml-1 text-indigo-800">{analysis.difficulty}</span>
+                        </span>
+                        <span className="flex items-center">
+                            🎨 Style: <span className="ml-1 text-indigo-800">{analysis.visualStyle}</span>
+                        </span>
+                    </div>
+                </div>
+
+                <div className="bg-slate-50 p-3 rounded-xl border border-slate-200 text-xs text-slate-600 mb-4 max-h-32 overflow-y-auto">
+                    <strong className="text-slate-700">🎯 Game Items (AI will generate images):</strong>
+                    <div className="mt-2 space-y-1">
+                        {analysis.gameItems?.map((item, idx) => (
+                            <div key={idx} className={`p-2 rounded border ${item.isCorrect ? 'bg-green-50 border-green-200' : 'bg-white border-slate-100'}`}>
+                                <span className="font-semibold text-slate-700">{item.name}</span>
+                                {item.isCorrect && <span className="ml-2 text-green-600">✓ Correct</span>}
+                                {item.description && (
+                                    <p className="text-[10px] text-slate-500 mt-1">→ {item.description}</p>
+                                )}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                <div className="flex gap-3">
+                    {!previewReady ? (
+                        <>
+                            <button
+                                onClick={handleTestGame}
+                                disabled={isGenerating}
+                                className={`flex-1 py-3 text-white font-bold rounded-xl shadow-lg transition-all flex items-center justify-center ${isGenerating
+                                    ? 'bg-slate-400 cursor-not-allowed'
+                                    : 'bg-sky-500 hover:bg-sky-600 shadow-sky-200 hover:scale-105 active:scale-95'
+                                    }`}
+                            >
+                                {isGenerating ? (
+                                    <>
+                                        <span className="animate-spin mr-2">⏳</span> Generating...
+                                    </>
+                                ) : (
+                                    <>
+                                        <span className="text-xl mr-2">🎮</span> Test Game
+                                    </>
+                                )}
+                            </button>
+                            <button
+                                onClick={handleCancelPreview}
+                                className="px-4 py-3 bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold rounded-xl transition-all hover:scale-105 active:scale-95"
+                                title="Cancel and start over"
+                            >
+                                🗑️
+                            </button>
+                        </>
+                    ) : (
+                        <>
+                            <button
+                                onClick={handleReplayPreview}
+                                className="flex-1 py-3 bg-purple-500 hover:bg-purple-600 text-white font-bold rounded-xl shadow-lg shadow-purple-200 transition-all hover:scale-105 active:scale-95 flex items-center justify-center"
+                            >
+                                <span className="text-xl mr-2">▶️</span> Replay Preview
+                            </button>
+                            <button
+                                onClick={handleCreateGame}
+                                className="flex-1 py-3 bg-green-500 hover:bg-green-600 text-white font-bold rounded-xl shadow-lg shadow-green-200 transition-all hover:scale-105 active:scale-95 flex items-center justify-center"
+                            >
+                                <span className="text-xl mr-2">✅</span> Add to Curriculum
+                            </button>
+                            <button
+                                onClick={handleCancelPreview}
+                                className="px-4 py-3 bg-red-100 hover:bg-red-200 text-red-600 font-bold rounded-xl transition-all hover:scale-105 active:scale-95"
+                                title="Cancel and start over"
+                            >
+                                🗑️
+                            </button>
+                        </>
+                    )}
+                </div>
+
+                {previewReady && (
+                    <div className="mt-3 p-3 bg-green-50 border border-green-200 rounded-xl text-center">
+                        <span className="text-green-700 font-bold text-sm">
+                            ✓ Preview ready! Test it again or add to curriculum.
+                        </span>
+                    </div>
+                )}
+            </div>
+        );
+    };
+
+    const renderActionButtons = () => {
+        if (analysis || previewReady) return null;
+
+        return (
+            <div>
+                <h3 className="font-bold text-slate-700 mb-2">Photo Ready</h3>
+                <div className="flex gap-3">
+                    <button
+                        onClick={handleAnalyze}
+                        disabled={isAnalyzing}
+                        className={`flex-1 px-6 py-3 rounded-xl font-bold text-white shadow-md transition-all ${isAnalyzing ? 'bg-slate-400' : 'bg-indigo-600 hover:bg-indigo-700 hover:scale-105'}`}
+                    >
+                        {isAnalyzing ? (
+                            <span className="flex items-center justify-center">
+                                <span className="animate-spin mr-2">⏳</span> Analyzing...
+                            </span>
+                        ) : (
+                            "✨ Analyze & Convert"
+                        )}
+                    </button>
+                    <button
+                        onClick={handleCancelPreview}
+                        className="px-4 py-3 rounded-xl font-bold text-slate-600 bg-slate-100 hover:bg-slate-200 transition-all"
+                        title="Cancel and start over"
+                    >
+                        🗑️
+                    </button>
+                </div>
+                {error && (
+                    <p className="text-red-500 text-sm mt-3">{error}</p>
+                )}
+            </div>
+        );
+    };
+
     return (
         <div className="bg-white p-6 rounded-3xl shadow-xl border border-slate-100 mt-6 relative overflow-hidden">
             <div className="absolute top-0 right-0 p-4 opacity-10 pointer-events-none">
@@ -250,51 +443,9 @@ export const HomeworkUploader: React.FC = () => {
                 Upload a photo of your child&apos;s worksheet. Our AI will transform it into an engaging game!
             </p>
 
-            {success && (
-                <div className="mb-6 p-4 bg-green-50 text-green-700 rounded-xl flex items-center border-2 border-green-300">
-                    <span className="text-2xl mr-3">✅</span>
-                    <div>
-                        <strong className="text-lg">Success!</strong>
-                        <p className="text-sm">The homework game has been added to the mission map. Check the dashboard!</p>
-                    </div>
-                </div>
-            )}
+            {renderSuccessMessage()}
 
-            {!selectedImage ? (
-                <div
-                    onClick={() => fileInputRef.current?.click()}
-                    onDragEnter={handleDragEnter}
-                    onDragLeave={handleDragLeave}
-                    onDragOver={handleDragOver}
-                    onDrop={handleDrop}
-                    className={`border-2 border-dashed rounded-xl p-8 text-center cursor-pointer transition-all duration-200
-                        ${isDragging
-                            ? 'border-green-400 bg-green-50 scale-105 shadow-lg'
-                            : 'border-slate-300 hover:bg-slate-50 hover:border-indigo-300'
-                        }
-                    `}
-                >
-                    {isDragging ? (
-                        <>
-                            <span className="text-4xl mb-2 block animate-bounce">📚</span>
-                            <span className="font-bold text-green-600 text-lg">Drop homework here!</span>
-                        </>
-                    ) : (
-                        <>
-                            <span className="text-4xl mb-2 block">📤</span>
-                            <span className="font-bold text-slate-600">Click to Upload Homework</span>
-                            <p className="text-xs text-slate-400 mt-1">Click to upload or drag & drop • Supports JPG, PNG</p>
-                        </>
-                    )}
-                    <input
-                        ref={fileInputRef}
-                        type="file"
-                        accept="image/*"
-                        className="hidden"
-                        onChange={handleFileSelect}
-                    />
-                </div>
-            ) : (
+            {!selectedImage ? renderUploadBox() : (
                 <div className="space-y-6">
                     <div className="flex items-start space-x-6">
                         {selectedImage !== 'restored' && (
@@ -313,141 +464,8 @@ export const HomeworkUploader: React.FC = () => {
                         )}
 
                         <div className="flex-1">
-                            {!analysis && !previewReady ? (
-                                <div>
-                                    <h3 className="font-bold text-slate-700 mb-2">Photo Ready</h3>
-                                    <div className="flex gap-3">
-                                        <button
-                                            onClick={handleAnalyze}
-                                            disabled={isAnalyzing}
-                                            className={`flex-1 px-6 py-3 rounded-xl font-bold text-white shadow-md transition-all ${isAnalyzing ? 'bg-slate-400' : 'bg-indigo-600 hover:bg-indigo-700 hover:scale-105'}`}
-                                        >
-                                            {isAnalyzing ? (
-                                                <span className="flex items-center justify-center">
-                                                    <span className="animate-spin mr-2">⏳</span> Analyzing...
-                                                </span>
-                                            ) : (
-                                                "✨ Analyze & Convert"
-                                            )}
-                                        </button>
-                                        <button
-                                            onClick={handleCancelPreview}
-                                            className="px-4 py-3 rounded-xl font-bold text-slate-600 bg-slate-100 hover:bg-slate-200 transition-all"
-                                            title="Cancel and start over"
-                                        >
-                                            🗑️
-                                        </button>
-                                    </div>
-                                    {error && (
-                                        <p className="text-red-500 text-sm mt-3">{error}</p>
-                                    )}
-                                </div>
-                            ) : null}
-                            {analysis && (
-                                <div className="animate-fade-in-up">
-                                    <div className="bg-gradient-to-br from-indigo-50 to-purple-50 p-5 rounded-2xl border-2 border-indigo-200 mb-4 shadow-sm">
-                                        <div className="flex justify-between items-start mb-3">
-                                            <span className="text-xs font-bold uppercase text-indigo-400 tracking-wider">✨ DETECTED CONTENT</span>
-                                            <div className="flex gap-2">
-                                                <span className="bg-indigo-500 text-white text-xs px-3 py-1 rounded-full font-bold">{analysis.subject}</span>
-                                                <span className="bg-purple-500 text-white text-xs px-3 py-1 rounded-full font-bold">{analysis.ageGroup}</span>
-                                            </div>
-                                        </div>
-                                        <h4 className="font-bold text-xl text-indigo-900 mb-2">{analysis.topic}</h4>
-                                        <p className="text-sm text-indigo-700 mb-4 leading-relaxed">{analysis.summary}</p>
-
-                                        <div className="flex items-center text-xs font-bold text-indigo-600 space-x-4 bg-white/50 rounded-lg p-3">
-                                            <span className="flex items-center">
-                                                🎮 Game: <span className="ml-1 text-indigo-800">{analysis.suggestedGameTemplate.replace('_', ' ')}</span>
-                                            </span>
-                                            <span className="flex items-center">
-                                                📊 Level: <span className="ml-1 text-indigo-800">{analysis.difficulty}</span>
-                                            </span>
-                                            <span className="flex items-center">
-                                                🎨 Style: <span className="ml-1 text-indigo-800">{analysis.visualStyle}</span>
-                                            </span>
-                                        </div>
-                                    </div>
-
-                                    <div className="bg-slate-50 p-3 rounded-xl border border-slate-200 text-xs text-slate-600 mb-4 max-h-32 overflow-y-auto">
-                                        <strong className="text-slate-700">🎯 Game Items (AI will generate images):</strong>
-                                        <div className="mt-2 space-y-1">
-                                            {analysis.gameItems?.map((item, idx) => (
-                                                <div key={idx} className={`p-2 rounded border ${item.isCorrect ? 'bg-green-50 border-green-200' : 'bg-white border-slate-100'}`}>
-                                                    <span className="font-semibold text-slate-700">{item.name}</span>
-                                                    {item.isCorrect && <span className="ml-2 text-green-600">✓ Correct</span>}
-                                                    {item.description && (
-                                                        <p className="text-[10px] text-slate-500 mt-1">→ {item.description}</p>
-                                                    )}
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </div>
-
-                                    <div className="flex gap-3">
-                                        {!previewReady ? (
-                                            <>
-                                                <button
-                                                    onClick={handleTestGame}
-                                                    disabled={isGenerating}
-                                                    className={`flex-1 py-3 text-white font-bold rounded-xl shadow-lg transition-all flex items-center justify-center ${isGenerating
-                                                        ? 'bg-slate-400 cursor-not-allowed'
-                                                        : 'bg-sky-500 hover:bg-sky-600 shadow-sky-200 hover:scale-105 active:scale-95'
-                                                        }`}
-                                                >
-                                                    {isGenerating && (
-                                                        <>
-                                                            <span className="animate-spin mr-2">⏳</span> Generating...
-                                                        </>
-                                                    )}
-                                                    {!isGenerating && (
-                                                        <>
-                                                            <span className="text-xl mr-2">🎮</span> Test Game
-                                                        </>
-                                                    )}
-                                                </button>
-                                                <button
-                                                    onClick={handleCancelPreview}
-                                                    className="px-4 py-3 bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold rounded-xl transition-all hover:scale-105 active:scale-95"
-                                                    title="Cancel and start over"
-                                                >
-                                                    🗑️
-                                                </button>
-                                            </>
-                                        ) : (
-                                            <>
-                                                <button
-                                                    onClick={handleReplayPreview}
-                                                    className="flex-1 py-3 bg-purple-500 hover:bg-purple-600 text-white font-bold rounded-xl shadow-lg shadow-purple-200 transition-all hover:scale-105 active:scale-95 flex items-center justify-center"
-                                                >
-                                                    <span className="text-xl mr-2">▶️</span> Replay Preview
-                                                </button>
-                                                <button
-                                                    onClick={handleCreateGame}
-                                                    className="flex-1 py-3 bg-green-500 hover:bg-green-600 text-white font-bold rounded-xl shadow-lg shadow-green-200 transition-all hover:scale-105 active:scale-95 flex items-center justify-center"
-                                                >
-                                                    <span className="text-xl mr-2">✅</span> Add to Curriculum
-                                                </button>
-                                                <button
-                                                    onClick={handleCancelPreview}
-                                                    className="px-4 py-3 bg-red-100 hover:bg-red-200 text-red-600 font-bold rounded-xl transition-all hover:scale-105 active:scale-95"
-                                                    title="Cancel and start over"
-                                                >
-                                                    🗑️
-                                                </button>
-                                            </>
-                                        )}
-                                    </div>
-
-                                    {previewReady && (
-                                        <div className="mt-3 p-3 bg-green-50 border border-green-200 rounded-xl text-center">
-                                            <span className="text-green-700 font-bold text-sm">
-                                                ✓ Preview ready! Test it again or add to curriculum.
-                                            </span>
-                                        </div>
-                                    )}
-                                </div>
-                            )}
+                            {renderActionButtons()}
+                            {renderAnalysisPreview()}
                         </div>
                     </div>
                 </div>
