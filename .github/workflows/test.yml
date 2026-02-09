@@ -49,10 +49,10 @@ jobs:
       run: |
         echo "Coverage thresholds are enforced by Vitest configuration"
         echo "Build will fail if coverage drops below:"
-        echo "  - Statements: 80%"
-        echo "  - Branches: 75%"
-        echo "  - Functions: 80%"
-        echo "  - Lines: 80%"
+        echo "  - Statements: 40%"
+        echo "  - Branches: 40%"
+        echo "  - Functions: 40%"
+        echo "  - Lines: 40%"
     
     - name: Archive test results
       if: always()
