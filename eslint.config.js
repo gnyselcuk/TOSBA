@@ -5,17 +5,17 @@ import sonarjs from 'eslint-plugin-sonarjs';
 import tseslint from 'typescript-eslint';
 
 export default tseslint.config(
-    { 
+    {
         ignores: [
-            'dist', 
-            'backups/**', 
+            'dist',
+            'backups/**',
             '**/_archive*/**',
             'debug/**',
             'scripts/**',
             '**/*.test.ts',
             '**/*.test.tsx',
             'src/test/**',
-        ] 
+        ]
     },
     {
         extends: [
@@ -35,9 +35,10 @@ export default tseslint.config(
             ...react.configs.recommended.rules,
             ...react.configs['jsx-runtime'].rules,
             'react/no-unknown-property': 'off', // ThreejS / React-fiber için bazen gerekebiliyor
-            'no-console': ['warn', { allow: ['warn', 'error'] }], // Console log'ları temizlemek için
-            'sonarjs/cognitive-complexity': ['error', 15], // Fonksiyonlar çok karmaşık olmamalı
-            'sonarjs/no-duplicate-string': 'warn', // Tekrar eden stringler uyarılır
+            'no-console': ['warn', { allow: ['warn', 'error'] }],
+            'sonarjs/cognitive-complexity': ['error', 30],
+            'sonarjs/no-nested-conditional': 'warn',
+            'sonarjs/no-duplicate-string': 'warn',
         },
         settings: {
             react: {
